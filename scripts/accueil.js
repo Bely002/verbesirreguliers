@@ -215,9 +215,7 @@ function loadquestion() {
         </div>`
     }
     displayscore.innerText = `${score} sur ${question - 1}`;
-    const percent = score/(question-1)*90
-    cursor.style["bottom"]=`${percent}%`
-    cursor.style["top"]=`${90-percent}%`
+    setcursortransform()
     myInput = document.querySelector(".inputask");
     myInput.focus();
 }
@@ -228,4 +226,20 @@ document.addEventListener("keypress",function(event){
         event.preventDefault()
         document.querySelector(".enterbtn").click()
     }
+})
+
+function setcursortransform() {
+    if(window.innerWidth<500){
+        const percent = score/(question-1)*80
+        cursor.style["right"]=`${percent}%`
+        cursor.style["left"]=`${80-percent}%`
+    }else{
+        const percent = score/(question-1)*90
+        cursor.style["bottom"]=`${percent}%`
+        cursor.style["top"]=`${90-percent}%`
+    }
+}
+
+window.addEventListener("resize",()=> {
+    setcursortransform()
 })
